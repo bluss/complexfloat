@@ -3,6 +3,15 @@ name = "complexfloat"
 version = "0.0.1"
 authors = ["bluss"]
 
+license = "MIT/Apache-2.0"
+
+repository = "https://github.com/bluss/complexfloat"
+documentation = "https://bluss.github.io/complexfloat/"
+
+description = "A trait for generics over f32, f64 and Complex<f32>, Complex<f64>, and a more complete trait for just f32, f64 too."
+
+keywords = ["numerics", "math"]
+
 [dependencies]
 
 num = { version = "0.1", default-features = false, features = ["complex"] }
