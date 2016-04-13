@@ -3,7 +3,6 @@ sudo: false
 
 # run builds for all the trains (and more)
 rust:
-  - stable
   - beta
   - nightly
 
