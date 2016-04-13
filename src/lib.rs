@@ -1,5 +1,9 @@
+#![cfg_attr(not(test), no_std)]
 extern crate asprim;
 extern crate num;
+
+#[cfg(not(test))]
+extern crate core as std;
 
 pub use asprim::AsPrim;
 
