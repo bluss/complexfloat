@@ -1,0 +1,9 @@
+[package]
+name = "complexfloat"
+version = "0.0.1"
+authors = ["bluss"]
+
+[dependencies]
+
+num = { version = "0.1", default-features = false, features = ["complex"] }
+asprim = "0.1"
