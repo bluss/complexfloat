@@ -3,6 +3,10 @@ complexfloat
 
 ComplexFloat is a trait that f32, f64, Complex<f32>, Complex<f64> implement.
 
+`API Documentation HERE`__
+
+__ https://bluss.github.io/complexfloat/
+
 License
 =======
 
