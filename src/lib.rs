@@ -8,6 +8,7 @@ extern crate core as std;
 pub use asprim::AsPrim;
 
 use std::any::Any;
+use std::{f32, f64};
 
 use num::Float;
 use num::{Complex, Zero, One};
@@ -117,7 +118,7 @@ macro_rules! float_impl {
             #[inline(always)]
             fn conj(&self) -> $t { *self }
             #[inline(always)]
-            fn arg(&self) -> $t { 0. }
+            fn arg(&self) -> $t { if self.is_sign_positive() { 0. } else { <$t>::pi() } }
             impl_self_methods!{
                 sqrt, exp, ln,
                 sin, cos, tan,
@@ -177,11 +178,37 @@ float_impl!{f64}
 complex_impl!{f32}
 complex_impl!{f64}
 
+// helper trait
+trait Pi {
+    fn pi() -> Self;
+}
+
+impl Pi for f32 {
+    fn pi() -> Self {
+        f32::consts::PI
+    }
+}
+
+impl Pi for f64 {
+    fn pi() -> Self {
+        f64::consts::PI
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use num::Complex;
     use num::Float;
     use super::*;
+    use std::f64;
+    const F64S: &'static [f64] = &[
+        0., 1., f64::consts::PI,
+        f64::INFINITY, f64::MAX, f64::MIN,
+    ];
+
+    fn c<F: Float>(x: F, y: F) -> Complex<F> {
+        Complex::new(x, y)
+    }
 
     fn dub_imag<F: ComplexFloat>(x: F) -> F::Real {
         (x + x).imag()
@@ -232,5 +259,15 @@ mod tests {
         arithmetic(f, 3.);
         output(f);
         output(z);
+    }
+    
+    #[test]
+    fn arg() {
+        for &f in F64S {
+            println!("{:?}", f);
+            assert_eq!(c(f, 0.).arg(), f.arg());
+            println!("{:?}", -f);
+            assert_eq!(c(-f, 0.).arg(), (-f).arg());
+        }
     }
 }
