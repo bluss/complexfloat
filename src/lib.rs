@@ -50,8 +50,6 @@ pub trait ComplexFloat :
     fn is_complex() -> bool;
     fn real(&self) -> Self::Real;
     fn imag(&self) -> Self::Real;
-    /// Create ComplexFloat from real part x.
-    fn from_real(x: Self::Real) -> Self;
     /// Create ComplexFloat from real part x and imaginary part y.
     ///
     /// y is ignored if not applicable.
@@ -111,8 +109,6 @@ macro_rules! float_impl {
             #[inline(always)]
             fn imag(&self) -> $t { 0. }
             #[inline(always)]
-            fn from_real(x: $t) -> $t { x }
-            #[inline(always)]
             fn from_real_imag(x: $t, _y: $t) -> $t { x }
             #[inline(always)]
             fn norm(&self) -> $t { <$t>::abs(*self) }
@@ -147,8 +143,6 @@ macro_rules! complex_impl {
             fn real(&self) -> $t { self.re }
             #[inline(always)]
             fn imag(&self) -> $t { self.im }
-            #[inline(always)]
-            fn from_real(x: $t) -> Self { Self::new(x, 0.) }
             #[inline(always)]
             fn from_real_imag(x: $t, y: $t) -> Self { Self::new(x, y) }
             #[inline(always)]
