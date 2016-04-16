@@ -54,6 +54,9 @@ pub trait ComplexFloat :
     ///
     /// y is ignored if not applicable.
     fn from_real_imag(x: Self::Real, y: Self::Real) -> Self;
+
+    /// Return the norm of the number, which is
+    /// it magnitue as a complex number
     fn norm(&self) -> Self::Real;
     fn conj(&self) -> Self;
     fn arg(&self) -> Self::Real;
@@ -263,6 +266,16 @@ mod tests {
             assert_eq!(c(f, 0.).arg(), f.arg());
             println!("{:?}", -f);
             assert_eq!(c(-f, 0.).arg(), (-f).arg());
+        }
+    }
+    
+    #[test]
+    fn norm() {
+        for &f in F64S {
+            println!("{:?}", f);
+            assert_eq!(c(f, 0.).norm(), f.norm());
+            println!("{:?}", -f);
+            assert_eq!(c(-f, 0.).norm(), (-f).norm());
         }
     }
 }
