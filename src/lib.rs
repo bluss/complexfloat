@@ -40,6 +40,7 @@ pub trait ComplexFloat :
     Div<Output=Self> + Div<<Self as ComplexFloat>::Real, Output=Self> + 
     Mul<Output=Self> + Mul<<Self as ComplexFloat>::Real, Output=Self> + 
     Copy + Zero + One + PartialEq + Display + Debug +
+    From<<Self as ComplexFloat>::Real> +
     'static + Send + Sync
 
     where <Self as ComplexFloat>::Real: FloatMore
@@ -219,7 +220,7 @@ mod tests {
     }
 
     fn real_sqrt<F: ComplexFloat>(x: F) -> F {
-        F::from_real(x.real().sqrt())
+        F::from(x.real().sqrt())
     }
 
     fn arithmetic<F: ComplexFloat>(x: F, y: F::Real) -> F {
