@@ -24,6 +24,7 @@ pub trait FloatMore :
     Display + Debug + LowerExp + UpperExp +
     'static + Any +
     AddAssign + SubAssign + MulAssign + DivAssign + RemAssign +
+    ComplexFloat +
     Send + Sync +
     AsPrim
 { }
@@ -34,6 +35,12 @@ impl FloatMore for f64 { }
 /// A trait for `f32, f64, Complex<f32>, Complex<f64>` together.
 ///
 /// The associated type `Real` points to the float type (either `f32` or `f64`).
+///
+/// The idea behind this trait is to treat `f32, f64` as representing the
+/// real subset of the complex numbers.
+///
+/// The rule should be that if `let x: f32`, then `x` and `Complex::new(x, 0.)`
+/// behave the same way under the methods of this trait.
 pub trait ComplexFloat : 
     Add<Output=Self> + Add<<Self as ComplexFloat>::Real, Output=Self> + 
     Sub<Output=Self> + Sub<<Self as ComplexFloat>::Real, Output=Self> + 
