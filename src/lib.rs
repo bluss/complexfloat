@@ -68,6 +68,9 @@ pub trait ComplexFloat :
     fn conj(&self) -> Self;
     fn arg(&self) -> Self::Real;
 
+    fn powf(&self, Self::Real) -> Self;
+    fn pow(&self, Self) -> Self;
+
     fn sqrt(&self) -> Self;
     fn exp(&self) -> Self;
     fn ln(&self) -> Self;
@@ -126,6 +129,10 @@ macro_rules! float_impl {
             fn conj(&self) -> $t { *self }
             #[inline(always)]
             fn arg(&self) -> $t { if self.is_sign_positive() { 0. } else { <$t>::pi() } }
+            #[inline(always)]
+            fn powf(&self, exp: Self::Real) -> Self { <$t>::powf(*self, exp) }
+            #[inline(always)]
+            fn pow(&self, exp: Self) -> Self { <$t>::powf(*self, exp) }
             impl_self_methods!{
                 sqrt, exp, ln,
                 sin, cos, tan,
@@ -161,6 +168,10 @@ macro_rules! complex_impl {
             fn conj(&self) -> Self { Complex::conj(self) }
             #[inline(always)]
             fn arg(&self) -> $t { Complex::arg(self) }
+            #[inline(always)]
+            fn powf(&self, exp: Self::Real) -> Self { self.powf(exp) }
+            #[inline(always)]
+            fn pow(&self, exp: Self) -> Self { self.powc(exp) }
             impl_self_methods!{
                 sqrt, exp, ln,
                 sin, cos, tan,
