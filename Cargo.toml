@@ -14,5 +14,6 @@ keywords = ["numerics", "math"]
 
 [dependencies]
 
-num = { version = "0.1", default-features = false, features = ["complex"] }
+num-traits = { version = "0.1", default-features = false }
+num-complex = { version = "0.1", default-features = false }
 asprim = "0.1"

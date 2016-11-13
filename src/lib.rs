@@ -1,6 +1,7 @@
 #![cfg_attr(not(test), no_std)]
 extern crate asprim;
-extern crate num;
+extern crate num_complex;
+extern crate num_traits;
 
 #[cfg(not(test))]
 extern crate core as std;
@@ -10,8 +11,9 @@ pub use asprim::AsPrim;
 use std::any::Any;
 use std::{f32, f64};
 
-use num::Float;
-use num::{Complex, Zero, One};
+use num_traits::Float;
+use num_traits::{Zero, One};
+use num_complex::Complex;
 use std::fmt::{Display, Debug, LowerExp, UpperExp};
 use std::ops::{
     Add, Sub, Mul, Div,
@@ -213,8 +215,8 @@ impl Pi for f64 {
 
 #[cfg(test)]
 mod tests {
-    use num::Complex;
-    use num::Float;
+    use num_complex::Complex;
+    use num_traits::Float;
     use super::*;
     use std::f64;
     const F64S: &'static [f64] = &[
