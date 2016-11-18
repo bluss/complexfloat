@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["AsPrim","Cast to a primitive numeric type using `as`."],["ComplexFloat","A trait for `f32, f64, Complex<f32>, Complex<f64>` together."],["FloatMore","An extension of `num::Float` with all properties that f32, f64 have in common"]]});
