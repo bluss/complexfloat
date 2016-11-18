@@ -8,7 +8,6 @@ extern crate core as std;
 
 pub use asprim::AsPrim;
 
-use std::any::Any;
 use std::{f32, f64};
 
 use num_traits::Float;
@@ -24,7 +23,7 @@ use std::ops::{
 pub trait FloatMore :
     Float +
     Display + Debug + LowerExp + UpperExp +
-    'static + Any +
+    'static +
     AddAssign + SubAssign + MulAssign + DivAssign + RemAssign +
     ComplexFloat +
     Send + Sync +
